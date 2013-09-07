@@ -29,7 +29,9 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVdec \
     libmm-omxcore \
-    libstagefrighthw
+    libstagefrighthw \
+    libcamera_client
+    
     
 # Graphics 
 PRODUCT_PACKAGES += \
@@ -61,7 +63,8 @@ PRODUCT_PACKAGES += \
 
 # Other
 PRODUCT_PACKAGES += \
-    dexpreopt
+    dexpreopt \
+    libnetcmdiface
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
