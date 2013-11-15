@@ -98,7 +98,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.switchablepair=/storage/sdcard1,/storage/sdcard0 \
     ro.emmc.sdcard.partition=14 \
     ro.vold.umsdirtyratio=50 \
-    ro.emmc=1
+    ro.emmc=1 \
+    ro.zygote.disable_gl_preload=true
 
 # dalvik vm
 PRODUCT_PROPERTY_OVERRIDES += \
