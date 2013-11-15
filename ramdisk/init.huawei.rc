@@ -4,10 +4,13 @@ on init
 # Set permissions for persist partition
     mkdir /persist 0771 system system
     mkdir /storage 0555 system sdcard_r
-    mkdir /storage/sdcard1 0000 system system
-    mkdir /storage/sdcard0 0000 system system
-
-    export EXTERNAL_STORAGE /storage/sdcard1
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/sdcard0 0700 root root
+    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+     
+    export EXTERNAL_STORAGE /storage/sdcard0
+    export SECONDARY_STORAGE /storage/sdcard1
 
     symlink /storage/sdcard1 /mnt/sdcard
     symlink /storage/sdcard1 /sdcard
@@ -172,6 +175,8 @@ on post-fs-data
     chown bluetooth system /data/btaddr
     chmod 0660 /data/btaddr
 
+    setprop ro.crypto.fuse_sdcard true
+
 # Chown polling nodes as needed from UI running on system server
     chown system system /persist
     chmod 0771 /persist
@@ -303,3 +308,16 @@ on property:ro.emmc=1
 on property:ro.use_data_netmgrd=false
 # netmgr not supported on specific target
     stop netmgrd
+
+# FUSE sdcard daemon for rich permissions (runs as media_rw)
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
+    disabled
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+service fuse_usbdisk0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk0 /storage/usbdisk0
+    class late_start
+    disabled
