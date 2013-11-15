@@ -86,6 +86,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.shutdown=true \
     ro.multi.rild=false
 
+# Disable SELinux
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.selinux=disabled
+
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.camera.landscape=true \
