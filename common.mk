@@ -121,7 +121,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     com.qc.hardware=true \
     DEVICE_PROVISIONED=1 \
-    ro.sf.lcd_density=240
+    ro.sf.lcd_density=240 \
+    ro.config.low_ram=true
 
 # Wi-Fi
 PRODUCT_PROPERTY_OVERRIDES += \
