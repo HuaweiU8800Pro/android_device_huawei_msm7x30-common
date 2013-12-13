@@ -3,7 +3,7 @@ import init.huawei.usb.rc
 on init
 # Set permissions for persist partition
     mkdir /persist 0771 system system
-    mkdir /storage 0775 system system
+    mkdir /storage 0555 system sdcard_r
     mkdir /storage/sdcard1 0700 root root
     mkdir /storage/sdcard0 0700 root root
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
