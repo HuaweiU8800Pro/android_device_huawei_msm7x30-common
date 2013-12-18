@@ -131,7 +131,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Kernel
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_KERNEL_SOURCE := kernel/huawei/honor
-BOARD_KERNEL_CMDLINE := console=ttyDCC0 androidboot.hardware=huawei
+BOARD_KERNEL_CMDLINE := console=ttyDCC0 androidboot.hardware=huawei androidboot.selinux=permissive
 BOARD_INSTALLER_CMDLINE := $(BOARD_KERNEL_CMDLINE)
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
