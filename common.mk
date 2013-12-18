@@ -90,6 +90,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.camera.landscape=true \
     debug.camcorder.disablemeta=0
+    
+# Camera			
+PRODUCT_PACKAGES += \			
+    Camera \			
+    camera.msm7x30 \			
+    libcamera			
+	    
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -145,7 +152,8 @@ PRODUCT_COPY_FILES += \
     device/huawei/msm7x30-common/ramdisk/init.huawei.rc:root/init.huawei.rc \
     device/huawei/msm7x30-common/ramdisk/init.huawei.usb.rc:root/init.huawei.usb.rc \
     device/huawei/msm7x30-common/ramdisk/ueventd.huawei.rc:root/ueventd.huawei.rc \
-    device/huawei/msm7x30-common/ramdisk/fstab.huawei:root/fstab.huawei
+    device/huawei/msm7x30-common/ramdisk/fstab.huawei:root/fstab.huawei \
+    device/huawei/msm7x30-common/prebuilt/etc/vold.fstab:system/etc/vold.fstab
 
 # ETC
 PRODUCT_COPY_FILES += \
@@ -198,7 +206,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/huawei/msm7x30-common/prebuilt/lib/libdivxdrmdecrypt.so:system/lib/libdivxdrmdecrypt.so \
     device/huawei/msm7x30-common/prebuilt/lib/libOmxVenc.so:system/lib/libOmxVenc.so \
-    device/huawei/msm7x30-common/prebuilt/lib/libQmageDecoder.so:system/lib/libQmageDecoder.so
+    device/huawei/msm7x30-common/prebuilt/lib/libQmageDecoder.so:system/lib/libQmageDecoder.so \
+    device/huawei/msm7x30-common/prebuilt/lib/libhardware_legacy.so:system/lib/libhardware_legacy.so
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
