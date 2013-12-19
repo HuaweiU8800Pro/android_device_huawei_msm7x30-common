@@ -92,11 +92,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.camcorder.disablemeta=0
     
 # Camera			
-PRODUCT_PACKAGES += \			
-    Camera \			
-    camera.msm7x30 \			
-    libcamera			
-	    
+PRODUCT_PACKAGES += \
+    Camera \
+    camera.msm7x30 \
+    libcamera
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
