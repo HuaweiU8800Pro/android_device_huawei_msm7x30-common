@@ -101,8 +101,8 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
-    ro.additionalmounts=/storage/sdcard0 \
-    ro.vold.switchablepair=/storage/sdcard1,/storage/sdcard0 \
+    ro.additionalmounts=/storage/sdcard1 \
+    ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1 \
     ro.emmc.sdcard.partition=14 \
     ro.vold.umsdirtyratio=50 \
     ro.emmc=1 \
