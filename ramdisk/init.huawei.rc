@@ -175,8 +175,6 @@ on post-fs-data
     chown bluetooth system /data/btaddr
     chmod 0660 /data/btaddr
 
-    setprop ro.crypto.fuse_sdcard true
-
 # Chown polling nodes as needed from UI running on system server
     chown system system /persist
     chmod 0771 /persist
@@ -314,7 +312,7 @@ service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0
     class late_start
     disabled
 
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
 
