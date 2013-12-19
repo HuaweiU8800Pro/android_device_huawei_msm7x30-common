@@ -151,8 +151,7 @@ PRODUCT_COPY_FILES += \
     device/huawei/msm7x30-common/ramdisk/init.huawei.rc:root/init.huawei.rc \
     device/huawei/msm7x30-common/ramdisk/init.huawei.usb.rc:root/init.huawei.usb.rc \
     device/huawei/msm7x30-common/ramdisk/ueventd.huawei.rc:root/ueventd.huawei.rc \
-    device/huawei/msm7x30-common/ramdisk/fstab.huawei:root/fstab.huawei \
-    device/huawei/msm7x30-common/prebuilt/etc/vold.fstab:system/etc/vold.fstab
+    device/huawei/msm7x30-common/ramdisk/fstab.huawei:root/fstab.huawei
 
 # ETC
 PRODUCT_COPY_FILES += \
