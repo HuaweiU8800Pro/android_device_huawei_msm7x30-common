@@ -12,6 +12,7 @@ TARGET_CPU_VARIANT:= scorpion
 BOARD_WANTS_EMMC_BOOT := true
 
 TARGET_QCOM_DISPLAY_VARIANT := legacy
+TARGET_QCOM_MEDIA_VARIANT := legacy
 
 # Just to check no errors on kernel due to ROM opmitizations
 $(shell mkdir -p $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/)
