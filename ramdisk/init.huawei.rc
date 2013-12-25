@@ -222,7 +222,12 @@ service qmuxd /system/bin/qmuxd
 service netmgrd /system/bin/netmgrd
     class main
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf -dd
+service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
+    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf \
+    -O/data/misc/wifi/sockets \
+    -e/data/misc/wifi/entropy.bin \
+    -g@android:wpa_eth0
+
     class late_start
     user root
     group wifi inet
