@@ -153,8 +153,5 @@ RECOVERY_FSTAB_VERSION           := 2
 # Custom releasetools for old partition table.
 TARGET_PROVIDES_RELEASETOOLS := true
 
-# Webkit
-USE_SET_METADATA := false
-
 # ETC
 TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x30-common/include
