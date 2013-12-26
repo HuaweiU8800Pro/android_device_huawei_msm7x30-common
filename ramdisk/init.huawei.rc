@@ -301,8 +301,16 @@ on property:ro.baseband="msm"
 on property:ro.baseband="unknown"
     start port-bridge
 
+# Wifi-Tethering
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
+    
+  service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
+    class main
+    user root
+    group root
+    oneshot
+    disabled  
 
 on property:ro.emmc=1
     start rmt_oeminfo
