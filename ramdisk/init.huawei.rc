@@ -240,6 +240,58 @@ service hciattach /system/bin/brcm_patchram_plus -d --enable_hci --enable_lpm --
     group qcom_oncrpc bluetooth net_bt_admin
     disabled
     oneshot
+    
+ #Bluetooth Fix by Desalesouche
+
+on property:init.svc.bluetoothd=running
+    write /sys/class/bluetooth/hci0/idle_timeout 7000
+
+service setbtmac /system/bin/setbtmac
+    class main
+    oneshot
+
+service pcm-bridge /system/bin/pcm-bridge /dev/smd7 /dev/ttyGS1
+
+service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
+    class main
+    disabled
+    oneshot
+
+service sapd /system/bin/sdptool add --channel=15 SAP
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service dund /system/bin/sdptool add --channel=1 DUN
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service ftp /system/bin/sdptool add --psm=5257 --channel=20 FTP
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service map0 /system/bin/sdptool add --channel=16 MAS0
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service map1 /system/bin/sdptool add --channel=17 MAS1
+    class main
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot   
+    
 
 service dhcpcd_eth0 /system/bin/dhcpcd -BKL
     disabled
