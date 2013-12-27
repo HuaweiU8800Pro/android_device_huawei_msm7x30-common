@@ -17,9 +17,6 @@ TARGET_QCOM_MEDIA_VARIANT := legacy
 # Just to check no errors on kernel due to ROM opmitizations
 $(shell mkdir -p $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/)
 
-# ROM Optimizations
-TARGET_USE_O3 := true
-
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
 
