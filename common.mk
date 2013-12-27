@@ -125,6 +125,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.no_hw_vsync=1 \
     com.qc.hardware=true \
     DEVICE_PROVISIONED=1 \
+    persist.webview.provider=classic \
     ro.sf.lcd_density=240 \
     ro.config.low_ram=true
 
