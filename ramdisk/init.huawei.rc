@@ -388,6 +388,10 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
 on property:ro.emmc=1
     start rmt_oeminfo
     start rmt_storage
+    
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+     class late_start
+     disabled    
 
 on property:ro.use_data_netmgrd=false
 # netmgr not supported on specific target
