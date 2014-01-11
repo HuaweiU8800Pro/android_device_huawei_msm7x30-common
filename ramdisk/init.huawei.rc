@@ -209,7 +209,6 @@ on post-fs-data
 
     chmod 0666 /proc/cmdline
     setprop vold.post_fs_data_done 1
-    wm size 480x854
 
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p10 /dev/block/mmcblk0p11 /dev/block/mmcblk0p17
     class main
