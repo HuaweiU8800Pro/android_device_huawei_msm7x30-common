@@ -163,10 +163,10 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # Kernel
 # Use Linaro ARM-Cortex A8 optimized toolchain
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-arm-cortex-a8
-TARGET_KERNEL_CUSTOM_TOOLCHAIN_SUFFIX := arm-cortex_a8-linux-gnueabi
-# Disable stock toolchain
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro-arm-cortex-a8
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN_SUFFIX := arm-cortex_a8-linux-gnueabi
+# Use stock toolchain
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_KERNEL_SOURCE := kernel/huawei/u8800pro
 BOARD_KERNEL_CMDLINE := console=ttyDCC0 androidboot.hardware=huawei androidboot.selinux=permissive
 BOARD_INSTALLER_CMDLINE := $(BOARD_KERNEL_CMDLINE)
