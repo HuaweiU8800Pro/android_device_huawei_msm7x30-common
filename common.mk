@@ -28,10 +28,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVdec \
+    libOmxVenc \
     libmm-omxcore \
     libstagefrighthw \
     libcamera_client
-    
     
 # Graphics 
 PRODUCT_PACKAGES += \
@@ -96,6 +96,18 @@ PRODUCT_PACKAGES += \
     Camera \
     camera.msm7x30 \
     libcamera
+    
+# Additional packages
+PRODUCT_PACKAGES += \
+	IDEOSX5Settings
+    
+# Hardware MAC address tool
+PRODUCT_PACKAGES += \
+	hwmac
+	
+# Torch
+PRODUCT_PACKAGES += \
+	Torch
 
 # USB
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -116,13 +128,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # system prop for opengles version
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.hwc.fakevsync=1 \
     debug.composition.type=gpu \
     ro.opengles.version=131072 \
     ro.bq.gpu_to_cpu_unsupported=1 \
     debug.sf.hw=1 \
     debug.egl.hw=1 \
-    debug.sf.no_hw_vsync=1 \
     com.qc.hardware=true \
     DEVICE_PROVISIONED=1 \
     persist.webview.provider=classic \
@@ -133,6 +143,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=15
+    
+# Enable transparent status bar in low_ram
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.force_highendgfx=true
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -206,7 +220,6 @@ PRODUCT_COPY_FILES += \
 # Video and Omx
 PRODUCT_COPY_FILES += \
     device/huawei/msm7x30-common/prebuilt/lib/libdivxdrmdecrypt.so:system/lib/libdivxdrmdecrypt.so \
-    device/huawei/msm7x30-common/prebuilt/lib/libOmxVenc.so:system/lib/libOmxVenc.so \
     device/huawei/msm7x30-common/prebuilt/lib/libQmageDecoder.so:system/lib/libQmageDecoder.so
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)

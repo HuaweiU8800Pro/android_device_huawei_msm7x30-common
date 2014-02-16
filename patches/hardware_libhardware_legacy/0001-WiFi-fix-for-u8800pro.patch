@@ -1,0 +1,49 @@
+From 9c9fd945f9dc2fad0830dca35c4160c35da5c02f Mon Sep 17 00:00:00 2001
+From: CrysisLTU <jokubas.ver@gmail.com>
+Date: Sun, 16 Feb 2014 17:21:46 +0200
+Subject: [PATCH 1/1] WiFi fix for u8800pro.
+
+Change-Id: Iecd828d2ba9605f95c9827d2fe4720c728827ece
+---
+ wifi/Android.mk |    6 +++++-
+ wifi/wifi.c     |    5 ++++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/wifi/Android.mk b/wifi/Android.mk
+index c7bdc59..3af1087 100644
+--- a/wifi/Android.mk
++++ b/wifi/Android.mk
+@@ -46,4 +46,8 @@ ifeq ($(BOARD_HAVE_SAMSUNG_WIFI),true)
+ LOCAL_CFLAGS += -DSAMSUNG_WIFI
+ endif
+ 
+-LOCAL_SHARED_LIBRARIES += libnetutils
++ifeq ($(BOARD_USE_HUAWEI_BCM_WIFI),true)
++LOCAL_CFLAGS += -DHUAWEI_BCM_WIFI
++endif
++
++LOCAL_SHARED_LIBRARIES += libnetutils libhwrpc
+diff --git a/wifi/wifi.c b/wifi/wifi.c
+index 5c8a11f..7d20bce 100644
+--- a/wifi/wifi.c
++++ b/wifi/wifi.c
+@@ -143,12 +143,15 @@ static unsigned char dummy_key[21] = { 0x02, 0x11, 0xbe, 0x33, 0x43, 0x35,
+                                        0x1c, 0xd3, 0xee, 0xff, 0xf1, 0xe2,
+                                        0xf3, 0xf4, 0xf5 };
+ 
++#ifdef HUAWEI_BCM_WIFI
++extern void huawei_oem_rapi_streaming_function(int n, int p1, int p2, int p3, int *v1, int *v2, int *v3);
++void sertomac(char *sernum, char *mac_addr);
++#endif
+ /* Is either SUPPLICANT_NAME or P2P_SUPPLICANT_NAME */
+ static char supplicant_name[PROPERTY_VALUE_MAX];
+ /* Is either SUPP_PROP_NAME or P2P_PROP_NAME */
+ static char supplicant_prop_name[PROPERTY_KEY_MAX];
+ 
+-
+ #ifdef SAMSUNG_WIFI
+ char* get_samsung_wifi_type()
+ {
+-- 
+1.7.9.5
+
