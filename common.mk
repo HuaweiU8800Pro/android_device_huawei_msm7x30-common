@@ -24,12 +24,16 @@ PRODUCT_PACKAGES += \
     VisualizationWallpapers \
     librs_jni
 
-# Video
+# Video and OMX
 PRODUCT_PACKAGES += \
     libOmxCore \
     libOmxVdec \
     libOmxVenc \
     libmm-omxcore \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxQcelp13Enc \
+    LibOmxEvrcEnc \
     libstagefrighthw \
     libcamera_client
     
@@ -129,6 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # system prop for opengles version
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=gpu \
+    debug.hwc.fakevsync=1 \
     ro.opengles.version=131072 \
     ro.bq.gpu_to_cpu_unsupported=1 \
     debug.sf.hw=1 \
