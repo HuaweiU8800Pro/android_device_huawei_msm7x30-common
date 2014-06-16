@@ -2,6 +2,7 @@ USE_CAMERA_STUB := false
 BOARD_HAVE_PRE_KITKAT_AUDIO_BLOB := true
 
 # Fm radio
+#BOARD_HAVE_QCOM_FM := true
 #BOARD_HAVE_FM_RADIO := true
 #BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 #BOARD_FM_DEVICE := bcm4329
@@ -11,6 +12,9 @@ ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
 COMMON_GLOBAL_CFLAGS += -DTARGET7x30 -DTARGET_MSM7x30
 $(shell mkdir -p $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/)
+
+# Override healthd HAL
+#BOARD_HAL_STATIC_LIBRARIES := libhealthd.qcom
 
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 #BOARD_HAVE_BACK_MIC_CAMCORDER := true
@@ -39,8 +43,7 @@ BOARD_WANTS_EMMC_BOOT := true
 
 # Conserve memory in the Dalvik heap
 # Details: https://github.com/CyanogenMod/android_dalvik/commit/15726c81059b74bf2352db29a3decfc4ea9c1428
-#TARGET_ARCH_LOWMEM := true
-#TARGET_ARCH_HAVE_NEON := true
+TARGET_ARCH_LOWMEM := true
 
 TARGET_QCOM_DISPLAY_VARIANT := legacy
 TARGET_QCOM_MEDIA_VARIANT := legacy
@@ -57,10 +60,10 @@ BOARD_QCOM_VOIP_ENABLED := true
 TARGET_BOARD_PLATFORM := msm7x30
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-#TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp
-#TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp
+#TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+#TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp
 
 TARGET_USE_SCORPION_BIONIC_OPTIMIZATION := true
 TARGET_USE_SCORPION_PLD_SET := true
@@ -81,7 +84,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_ICS_DECODERS
 COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
 COMMON_GLOBAL_CFLAGS += -DQCOM_ICS_COMPAT
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DGENLOCK_IOC_DREADLOCK
+#COMMON_GLOBAL_CFLAGS += -DGENLOCK_IOC_DREADLOCK
 COMMON_GLOBAL_CFLAGS += -DUSE_GENLOCK
 COMMON_GLOBAL_CFLAGS += -DEGL_NEEDS_FNW
 
@@ -91,11 +94,12 @@ COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB
 BOARD_USES_QCOM_LEGACY_CAM_PARAMS := true
 CAMERA_USES_SURFACEFLINGER_CLIENT_STUB := true
 TARGET_DISABLE_ARM_PIE := true
+BOARD_USES_CAMERA_FAST_AUTOFOCUS := true
 
 # Graphics
 DCHECK_FOR_EXTERNAL_FORMAT := true
 USE_OPENGL_RENDERER := true
-COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60 -DQCOM_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=65 -DQCOM_HARDWARE
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_OVERLAY := true
 BOARD_EGL_CFG := device/huawei/msm7x30-common/egl.cfg
@@ -104,6 +108,7 @@ BOARD_OVERLAY_FORMAT_YCbCr_420_SP := true
 BOARD_OVERLAY_MINIFICATION_LIMIT := 2
 BOARD_NO_RGBX_8888 := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
+BOARD_HAVE_PIXEL_FORMAT_INFO := true
 
 # Qcom/Display
 TARGET_USES_ION := false
@@ -114,14 +119,13 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_LEGACY_FB := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+#NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_DOESNT_USE_FENCE_SYNC := true
 TARGET_ENABLE_AV_ENHANCEMENTS := true
 TARGET_USES_POST_PROCESSING := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 TARGET_USE_LEGACY_GRALLOC := true
 COMMON_GLOBAL_CFLAGS += -DANCIENT_GL
-BOARD_USES_PMEM_ADSP := true
 
 # Web Rendering
 ENABLE_WEBGL := true
@@ -163,11 +167,12 @@ BOARD_GPS_LIBRARIES := libloc_api
 TARGET_PROVIDES_LIBLIGHT := true
 
 # Kernel
-# Use Linaro ARM-Cortex A8 optimized toolchain
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-cortex_a8-linux-gnueabi-linaro_4.7.4-2014.01
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN_SUFFIX := arm-cortex_a8-linux-gnueabi
-# Use stock toolchain
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+#AND is arm-linux-androideabi (rom code)
+TARGET_GCC_VERSION := arm-linux-androideabi-4.9
+TARGET_GCC_VERSION_AND := 4.8
+#ARM is arm-eabi ( kernel code)
+#TARGET_GCC_VERSION_ARM := 4.8
+TARGET_KERNEL_CUSTOM_TOOLCHAIN :=arm-eabi-4.8
 TARGET_KERNEL_SOURCE := kernel/huawei/u8800pro
 BOARD_KERNEL_CMDLINE := console=ttyDCC0 androidboot.hardware=huawei androidboot.selinux=permissive
 BOARD_INSTALLER_CMDLINE := $(BOARD_KERNEL_CMDLINE)
@@ -175,12 +180,13 @@ BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
 
 # File System
+#TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
-BOARD_VOLD_MAX_PARTITIONS := 14
+BOARD_VOLD_MAX_PARTITIONS := 16
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -189,7 +195,7 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun0/file"
 TARGET_RECOVERY_INITRC := device/huawei/msm7x30-common/recovery/recovery.rc
 #TARGET_RECOVERY_FSTAB := device/huawei/msm7x30-common/recovery_recovery.fstab
 BOARD_RECOVERY_RMT_STORAGE := true
-#BOARD_CUSTOM_GRAPHICS := ../../../device/huawei/msm7x30-common/recovery/graphics_cn.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/huawei/msm7x30-common/recovery/graphics.c
 TARGET_PREBUILT_RECOVERY_KERNEL := device/huawei/msm7x30-common/recovery_kernel
 TARGET_RECOVERY_FSTAB            := device/huawei/msm7x30-common/ramdisk/fstab.huawei
 RECOVERY_FSTAB_VERSION           := 2
@@ -199,23 +205,3 @@ TARGET_PROVIDES_RELEASETOOLS := true
 
 # ETC
 TARGET_SPECIFIC_HEADER_PATH := device/huawei/msm7x30-common/include
-
-# SELinux
-BOARD_SEPOLICY_DIRS := \
-device/huawei/msm7x30-common/sepolicy
-
-BOARD_SEPOLICY_UNION := \
-        file_contexts \
-        genfs_contexts \
-        app.te \
-        btmacreader.te \
-        device.te \
-        drmserver.te \
-        init_shell.te \
-        file.te \
-        rild.te \
-        sensors_config.te \
-        shell.te \
-        surfaceflinger.te \
-        system.te \
-        zygote.te
